@@ -71,10 +71,6 @@ workflows:
   test-and-build:
     jobs:
       - unit-test
-      - android/run-ui-tests:
-          filters:
-            branches:
-              ignore: main # regular commits
       - android-test:
           matrix:
             alias: android-test-all
@@ -92,8 +88,6 @@ workflows:
           filters:
             branches:
               only: main # Commits to main branch
-      - benchmarks-emulator
-      - benchmarks-ftl
       - release-build:
           requires:
             - unit-test
