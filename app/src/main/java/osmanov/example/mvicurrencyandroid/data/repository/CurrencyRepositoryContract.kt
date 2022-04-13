@@ -6,4 +6,6 @@ interface CurrencyRepositoryContract {
 
     suspend fun getAvailableCurrencies(): List<CurrencyModel>?
 
+    fun updateCurrentTimestamp()
+
 }
