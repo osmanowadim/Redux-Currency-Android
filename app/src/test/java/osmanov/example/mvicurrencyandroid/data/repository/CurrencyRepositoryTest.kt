@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.koin.core.context.startKoin
@@ -69,10 +70,21 @@ class CurrencyRepositoryTest : AutoCloseKoinTest() {
     fun getAvailableCurrenciesMustReturnCurrenciesFromDb() = runBlocking {
         whenever(currencyCache.getCurrencies()).thenReturn(currencies)
         whenever(apiRepository.getCurrencies()).thenReturn(null)
+        currencyRepository.updateCurrentTimestamp()
 
         val availableCurrencies = currencyRepository.getAvailableCurrencies()
 
         assertEquals(currencies, availableCurrencies)
+    }
+
+    @Test
+    fun getNotActualCurrenciesMustReturnNull() = runBlocking {
+        whenever(currencyCache.getCurrencies()).thenReturn(currencies)
+        whenever(apiRepository.getCurrencies()).thenReturn(null)
+
+        val availableCurrencies = currencyRepository.getAvailableCurrencies()
+
+        assertNull(availableCurrencies)
     }
 
     @Test
