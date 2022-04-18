@@ -1,7 +1,7 @@
-# Mvi-Currency-Android
+# Redux-Currency-Android
 
 Simple app that shows exchange rate relative to UAH, using data from https://bank.gov.ua/NBUStatService/v1/statdirectory, 
-structured according to the MVI pattern.
+structured according to the Redux pattern.
 
 This app contains the implementation of network requests using Retrofit + Coroutine and parse XML as response from server.
 
