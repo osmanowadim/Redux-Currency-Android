@@ -9,17 +9,22 @@ import osmanov.example.mvicurrencyandroid.presentation.main.ui.MainViewModel
 /**
  * Module for features. Like Main Screen, Detail Screen ...
  */
-val mainModule = module {
+val mainStoreModule = module {
     factory { MainStore(get()) }
+}
+val mainViewModule = module {
     factory { MainViewModel(get()) }
 }
-
-val detailModule = module {
+val detailStoreModule = module {
     factory { DetailStore() }
+}
+val detailViewModule = module {
     factory { DetailViewModel(get()) }
 }
 
 val featureModules = arrayOf(
-    mainModule,
-    detailModule
+    mainStoreModule,
+    mainViewModule,
+    detailStoreModule,
+    detailViewModule
 )

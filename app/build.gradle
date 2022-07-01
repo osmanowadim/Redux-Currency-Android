@@ -19,16 +19,38 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField 'String', 'BASE_URL', '\"https://bank.gov.ua/NBUStatService/v1/statdirectory/\"'
+
+        signingConfigs {
+            debug {
+                storeFile file("keystore/debug.jks")
+                storePassword("qwerty")
+                keyAlias("alias")
+                keyPassword("qwerty")
+            }
+        }
     }
 
     buildTypes {
         debug {
+            debuggable true
             testCoverageEnabled true
+            applicationIdSuffix ".d"
+            versionNameSuffix "-debug"
+            resValue "string", "app_name", "MviCurrencyAndroid debug"
+        }
+        storybook {
+            debuggable true
+            testCoverageEnabled true
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".s"
+            versionNameSuffix "-storybook"
+            resValue "string", "app_name", "MviCurrencyAndroid storybook"
         }
         release {
             debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "app_name", "MviCurrencyAndroid"
         }
     }
     compileOptions {

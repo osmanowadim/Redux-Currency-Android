@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">MviCurrencyAndroid</string>
     <string name="empty_list">Empty list</string>
     <string name="exchange_on">Exchange is valid on %s</string>
     <string name="exchange_id_for">Currency code = %s</string>
