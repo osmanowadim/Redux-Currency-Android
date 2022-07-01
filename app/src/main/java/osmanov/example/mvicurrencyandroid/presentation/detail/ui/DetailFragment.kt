@@ -3,6 +3,7 @@ package osmanov.example.mvicurrencyandroid.presentation.detail.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -26,21 +27,28 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), MviView<DetailSta
         detailViewModel.bind(viewLifecycleOwner.lifecycleScope, this@DetailFragment)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            detailViewModel.obtainAction(DetailAction.GetCurrencyExchange)
+            detailViewModel.obtainAction(DetailAction.GetCurrencyExchange(detailFragmentArgs.currency))
         }
     }
 
     override fun renderState(state: DetailState) {
         when (state) {
-            is DetailState.Default -> {
+            is DetailState.Success -> {
+                tvError?.isVisible = false
                 tvDate?.text =
-                    getString(R.string.exchange_on, detailFragmentArgs.currency.exchangeDate)
-                tvCode?.text = getString(R.string.exchange_id_for, detailFragmentArgs.currency.code)
+                    getString(R.string.exchange_on, state.currency.exchangeDate)
+                tvCode?.text = getString(R.string.exchange_id_for, state.currency.code)
                 tvRate?.text =
                     getString(
                         R.string.exchange_rate_for,
-                        detailFragmentArgs.currency.rate.toString()
+                        state.currency.rate.toString()
                     )
+            }
+            is DetailState.Error -> {
+                tvError?.isVisible = true
+            }
+            is DetailState.Default -> {
+                tvError?.isVisible = false
             }
         }
     }
@@ -48,7 +56,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), MviView<DetailSta
     override fun renderNews(new: DetailNews) {
         when (new) {
             is DetailNews.Message -> {
-                Toast.makeText(requireContext(), new.content, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), new.content, new.duration).show()
             }
         }
     }

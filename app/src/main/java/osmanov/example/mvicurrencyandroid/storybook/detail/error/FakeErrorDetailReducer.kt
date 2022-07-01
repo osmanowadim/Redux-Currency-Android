@@ -1,9 +1,12 @@
-package osmanov.example.mvicurrencyandroid.presentation.detail.mvi
+package osmanov.example.mvicurrencyandroid.storybook.detail.error
 
 import android.widget.Toast
 import osmanov.example.mvicurrencyandroid.common.mvi.Reducer
+import osmanov.example.mvicurrencyandroid.presentation.detail.mvi.DetailAction
+import osmanov.example.mvicurrencyandroid.presentation.detail.mvi.DetailNews
+import osmanov.example.mvicurrencyandroid.presentation.detail.mvi.DetailState
 
-class DetailReducer : Reducer<DetailState, DetailAction, DetailNews> {
+class FakeErrorDetailReducer : Reducer<DetailState, DetailAction, DetailNews> {
 
     override fun reduce(state: DetailState, action: DetailAction): Pair<DetailState?, DetailNews?> {
         var reducedState: DetailState? = null

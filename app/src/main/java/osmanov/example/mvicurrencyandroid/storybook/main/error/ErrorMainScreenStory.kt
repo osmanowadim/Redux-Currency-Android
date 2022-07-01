@@ -1,13 +1,13 @@
-package osmanov.example.mvicurrencyandroid.storybook.main.loading
+package osmanov.example.mvicurrencyandroid.storybook.main.error
 
 import androidx.navigation.NavController
 import org.koin.core.module.Module
 import osmanov.example.mvicurrencyandroid.R
 import osmanov.example.mvicurrencyandroid.storybook.core.Story
 
-class LoadingMainScreenStory : Story {
+class ErrorMainScreenStory : Story {
 
-    override val title: String = "Loading Main Screen Story"
+    override val title: String = "Error Main Screen Story"
 
     override fun present(
         navController: NavController,

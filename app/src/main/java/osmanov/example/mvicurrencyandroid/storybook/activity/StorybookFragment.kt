@@ -13,11 +13,14 @@ import kotlinx.android.synthetic.main.item_story.view.*
 import org.koin.core.module.Module
 import osmanov.example.mvicurrencyandroid.R
 import osmanov.example.mvicurrencyandroid.common.extensions.swapModules
-import osmanov.example.mvicurrencyandroid.di.fakeLoadingMainStoreModule
-import osmanov.example.mvicurrencyandroid.di.mainStoreModule
+import osmanov.example.mvicurrencyandroid.di.*
 import osmanov.example.mvicurrencyandroid.presentation.base.BaseFragment
 import osmanov.example.mvicurrencyandroid.storybook.core.Story
+import osmanov.example.mvicurrencyandroid.storybook.detail.error.ErrorDetailScreenStory
+import osmanov.example.mvicurrencyandroid.storybook.detail.success.SuccessDetailScreenStory
+import osmanov.example.mvicurrencyandroid.storybook.main.error.ErrorMainScreenStory
 import osmanov.example.mvicurrencyandroid.storybook.main.loading.LoadingMainScreenStory
+import osmanov.example.mvicurrencyandroid.storybook.main.success.SuccessMainScreenStory
 
 val stories = listOf(
     StorybookAdapterItem.StoryChapter("Main Screen Chapter"),
@@ -25,12 +28,33 @@ val stories = listOf(
         story = LoadingMainScreenStory(),
         fakeModules = listOf(fakeLoadingMainStoreModule),
         originModules = listOf(mainStoreModule)
+    ),
+    StorybookAdapterItem.StoryItem(
+        story = ErrorMainScreenStory(),
+        fakeModules = listOf(fakeErrorMainStoreModule),
+        originModules = listOf(mainStoreModule)
+    ),
+    StorybookAdapterItem.StoryItem(
+        story = SuccessMainScreenStory(),
+        fakeModules = listOf(fakeSuccessMainStoreModule),
+        originModules = listOf(mainStoreModule)
+    ),
+    StorybookAdapterItem.StoryChapter("Detail Screen Chapter"),
+    StorybookAdapterItem.StoryItem(
+        story = SuccessDetailScreenStory(),
+        fakeModules = listOf(fakeSuccessDetailStoreModule),
+        originModules = listOf(detailStoreModule)
+    ),
+    StorybookAdapterItem.StoryItem(
+        story = ErrorDetailScreenStory(),
+        fakeModules = listOf(fakeErrorDetailStoreModule),
+        originModules = listOf(detailStoreModule)
     )
 )
 
 class StorybookFragment : BaseFragment(R.layout.fragment_storybook) {
 
-    private var swapPair: Pair<List<Module>, List<Module>>? = null
+    private var swapModules: Pair<List<Module>, List<Module>>? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +63,11 @@ class StorybookFragment : BaseFragment(R.layout.fragment_storybook) {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             adapter = StorybookAdapter(stories) { story, fakeModules, originModules ->
-                swapPair = fakeModules to originModules
+                swapModules = fakeModules to originModules
+                swapModules(
+                    loadModules = fakeModules,
+                    unloadModules = originModules
+                )
                 story.present(
                     navController = requireActivity().findNavController(R.id.navHostFragment),
                     fakeModules = fakeModules,
@@ -51,12 +79,12 @@ class StorybookFragment : BaseFragment(R.layout.fragment_storybook) {
 
     override fun onResume() {
         super.onResume()
-        swapPair?.let {
+        swapModules?.let {
             swapModules(
                 unloadModules = it.first,
                 loadModules = it.second
             )
-            swapPair = null
+            swapModules = null
         }
     }
 
