@@ -5,9 +5,14 @@ import org.koin.core.module.Module
 import osmanov.example.mvicurrencyandroid.R
 import osmanov.example.mvicurrencyandroid.storybook.core.Story
 
+const val SuccessMainScreenStoryTitle = "Success Main Screen Story"
+
+/**
+ * Success story for MainFragment.
+ */
 class SuccessMainScreenStory : Story {
 
-    override val title: String = "Success Main Screen Story"
+    override val title: String = SuccessMainScreenStoryTitle
 
     override fun present(
         navController: NavController,

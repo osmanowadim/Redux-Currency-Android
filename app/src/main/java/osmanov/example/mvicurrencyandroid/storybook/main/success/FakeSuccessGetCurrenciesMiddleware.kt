@@ -4,6 +4,9 @@ import osmanov.example.mvicurrencyandroid.common.mvi.Middleware
 import osmanov.example.mvicurrencyandroid.model.CurrencyModel
 import osmanov.example.mvicurrencyandroid.presentation.main.mvi.MainAction
 
+/**
+ * Fake [Middleware] for Success Story. Always return GetCurrenciesDone with fake data.
+ */
 class FakeSuccessGetCurrenciesMiddleware : Middleware<MainAction>() {
 
     override suspend fun effect(action: MainAction): MainAction? {

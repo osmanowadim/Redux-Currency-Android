@@ -35,19 +35,32 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail), MviView<DetailSta
         when (state) {
             is DetailState.Success -> {
                 tvError?.isVisible = false
-                tvDate?.text =
-                    getString(R.string.exchange_on, state.currency.exchangeDate)
-                tvCode?.text = getString(R.string.exchange_id_for, state.currency.code)
-                tvRate?.text =
-                    getString(
+                tvDate?.apply {
+                    isVisible = true
+                    text = getString(R.string.exchange_on, state.currency.exchangeDate)
+                }
+                tvCode?.apply {
+                    isVisible = true
+                    text = getString(R.string.exchange_id_for, state.currency.code)
+                }
+                tvRate?.apply {
+                    isVisible = true
+                    text = getString(
                         R.string.exchange_rate_for,
                         state.currency.rate.toString()
                     )
+                }
             }
             is DetailState.Error -> {
+                tvDate?.isVisible = false
+                tvCode?.isVisible = false
+                tvRate?.isVisible = false
                 tvError?.isVisible = true
             }
             is DetailState.Default -> {
+                tvDate?.isVisible = false
+                tvCode?.isVisible = false
+                tvRate?.isVisible = false
                 tvError?.isVisible = false
             }
         }

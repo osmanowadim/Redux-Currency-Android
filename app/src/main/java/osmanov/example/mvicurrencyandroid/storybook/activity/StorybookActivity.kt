@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import osmanov.example.mvicurrencyandroid.R
 
+/**
+ * Entry point for Storybook flow. Set Activity UI, navigation and new start destination.
+ */
 class StorybookActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,8 +18,9 @@ class StorybookActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
 
         val navController = navHostFragment.navController
-        val navGraph = navController.navInflater.inflate(R.navigation.main_navigation)
-        navGraph.setStartDestination(R.id.fragment_storybook)
+        val navGraph = navController.navInflater.inflate(R.navigation.main_navigation).also {
+         it.setStartDestination(R.id.fragment_storybook)
+        }
         navController.graph = navGraph
     }
 

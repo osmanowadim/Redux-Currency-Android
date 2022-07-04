@@ -4,6 +4,9 @@ import osmanov.example.mvicurrencyandroid.data.repository.CurrencyRepositoryCont
 import osmanov.example.mvicurrencyandroid.presentation.main.mvi.MainReducer
 import osmanov.example.mvicurrencyandroid.presentation.main.mvi.MainStore
 
+/**
+ * Fake [MainStore] for Loading Story. Use [FakeLoadingGetCurrenciesMiddleware] as middleware in MVI.
+ */
 class FakeLoadingMainStore constructor(
     repository: CurrencyRepositoryContract
 ) : MainStore(repository) {

@@ -5,19 +5,19 @@ import osmanov.example.mvicurrencyandroid.presentation.detail.mvi.DetailAction
 import osmanov.example.mvicurrencyandroid.presentation.detail.mvi.DetailNews
 import osmanov.example.mvicurrencyandroid.presentation.detail.mvi.DetailState
 
+/**
+ * Fake [Reducer] for Success Story. Always return Success if currency is not null.
+ */
 class FakeSuccessDetailReducer : Reducer<DetailState, DetailAction, DetailNews> {
 
     override fun reduce(state: DetailState, action: DetailAction): Pair<DetailState?, DetailNews?> {
         var reducedState: DetailState? = null
-        var reducedNews: DetailNews? = null
-        when (action) {
-            is DetailAction.GetCurrencyExchangeDone -> {
-                reducedState = action.currency?.let {
-                    DetailState.Success(action.currency)
-                } ?: DetailState.Error
-            }
+        if (action is DetailAction.GetCurrencyExchangeDone) {
+            reducedState = action.currency?.let {
+                DetailState.Success(action.currency)
+            } ?: DetailState.Error
         }
-        return reducedState to reducedNews
+        return reducedState to null
     }
 
 }

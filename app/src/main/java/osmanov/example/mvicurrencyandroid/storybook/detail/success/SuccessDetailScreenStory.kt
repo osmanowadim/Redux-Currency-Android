@@ -2,14 +2,18 @@ package osmanov.example.mvicurrencyandroid.storybook.detail.success
 
 import androidx.navigation.NavController
 import org.koin.core.module.Module
-import osmanov.example.mvicurrencyandroid.common.extensions.swapModules
 import osmanov.example.mvicurrencyandroid.model.CurrencyModel
 import osmanov.example.mvicurrencyandroid.storybook.activity.StorybookFragmentDirections
 import osmanov.example.mvicurrencyandroid.storybook.core.Story
 
+const val SuccessDetailScreenStoryTitle = "Success Detail Screen Story"
+
+/**
+ * Success story for DetailFragment.
+ */
 class SuccessDetailScreenStory : Story {
 
-    override val title: String = "Success Detail Screen Story"
+    override val title: String = SuccessDetailScreenStoryTitle
 
     override fun present(
         navController: NavController,
