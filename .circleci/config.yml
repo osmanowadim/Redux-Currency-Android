@@ -39,7 +39,7 @@ jobs:
     steps:
       - checkout
       - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedStorybookAndroidTest
+          test-command: ./gradlew connectedDebugAndroidTest
           system-image: << parameters.system-image >>
       - run:
           name: Save test results
@@ -71,4 +71,7 @@ workflows:
   test-and-build:
     jobs:
       - unit-test
+      - android/run-ui-tests:
+            system-image: system-images;android-30;google_apis;x86
+            post-emulator-launch-assemble-command: ./gradlew assembleStorybookAndroidTest
       - android-test
