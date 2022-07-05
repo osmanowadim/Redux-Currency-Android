@@ -2,7 +2,6 @@ package osmanov.example.mvicurrencyandroid.presentation.main.mvi
 
 import android.widget.Toast
 import osmanov.example.mvicurrencyandroid.common.mvi.Reducer
-import osmanov.example.mvicurrencyandroid.presentation.main.ui.MainFragment
 import osmanov.example.mvicurrencyandroid.presentation.main.ui.MainFragmentDirections
 
 class MainReducer : Reducer<MainState, MainAction, MainNews> {
@@ -22,7 +21,7 @@ class MainReducer : Reducer<MainState, MainAction, MainNews> {
             is MainAction.GetCurrencies -> {
                 reducedState = MainState.Loading
             }
-            is MainAction.CurrencyItemClicked ->{
+            is MainAction.CurrencyItemClicked -> {
                 reducedState = MainState.Default(MainFragmentDirections.mainDetail(action.currency))
             }
         }

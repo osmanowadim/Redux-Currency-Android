@@ -7,6 +7,9 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
+import org.koin.core.module.Module
 
 /**
  * Navigate to [where] using [NavController]
@@ -24,4 +27,15 @@ fun <T> Flow<T>.launchWhenStarted(lifecycleScope: LifecycleCoroutineScope) {
     lifecycleScope.launchWhenStarted {
         this@launchWhenStarted.collect()
     }
+}
+
+/**
+ * Change Koin modules [loadModules], [unloadModules] dynamically.
+ *
+ * @param loadModules - list of [Module] which will be loaded in global Koin context.
+ * @param unloadModules - list of [Module] which will be unloaded in global Koin context.
+ */
+fun swapModules(loadModules: List<Module>, unloadModules: List<Module>) {
+    unloadKoinModules(unloadModules)
+    loadKoinModules(loadModules)
 }

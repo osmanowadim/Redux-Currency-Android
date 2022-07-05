@@ -18,10 +18,10 @@ class DetailStoreTest {
     }
 
     @Test
-    fun getMiddlewaresMustReturnEmptyValue() {
+    fun getMiddlewaresMustReturnNotEmptyValue() {
         val middlewares = store.middlewares
 
-        assertTrue(middlewares.isEmpty())
+        assertTrue(middlewares.isNotEmpty())
     }
 
 }

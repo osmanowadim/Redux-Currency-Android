@@ -83,7 +83,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main), MviView<MainState, Ma
     override fun renderNews(new: MainNews) {
         when (new) {
             is MainNews.Message -> {
-                Toast.makeText(requireContext(), new.content, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), new.content, new.duration).show()
             }
         }
     }
