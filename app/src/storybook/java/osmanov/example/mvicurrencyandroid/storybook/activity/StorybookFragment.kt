@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_storybook.*
-import kotlinx.android.synthetic.main.item_story.view.*
 import org.koin.core.module.Module
 import osmanov.example.mvicurrencyandroid.R
 import osmanov.example.mvicurrencyandroid.common.extensions.swapModules
@@ -59,7 +59,7 @@ class StorybookFragment : BaseFragment(R.layout.fragment_storybook) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rvList.apply {
+        view.findViewById<RecyclerView>(R.id.rvList).apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             adapter = StorybookAdapter(stories) { story, fakeModules, originModules ->
@@ -126,20 +126,20 @@ class StorybookAdapter(
 
     inner class StoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(storyItem: StorybookAdapterItem.StoryItem): Unit = with(itemView) {
-            ivArrow.setOnClickListener {
+            findViewById<ImageView>(R.id.ivArrow).setOnClickListener {
                 listener.invoke(
                     storyItem.story,
                     storyItem.fakeModules,
                     storyItem.originModules
                 )
             }
-            tvTitle.text = storyItem.story.title
+            findViewById<TextView>(R.id.tvTitle).text = storyItem.story.title
         }
     }
 
     inner class ChapterHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(storyChapter: StorybookAdapterItem.StoryChapter): Unit = with(itemView) {
-            tvTitle.text = storyChapter.chapter
+            findViewById<TextView>(R.id.tvTitle).text = storyChapter.chapter
         }
     }
 }

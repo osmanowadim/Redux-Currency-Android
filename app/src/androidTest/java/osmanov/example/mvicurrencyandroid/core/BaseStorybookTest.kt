@@ -9,6 +9,9 @@ import org.junit.Before
 import org.junit.Rule
 import osmanov.example.mvicurrencyandroid.storybook.activity.StorybookActivity
 
+/**
+ * Base class for Storybook UI tests. Enable device screen for running tests.
+ */
 open class BaseStorybookTest {
 
     @get : Rule
