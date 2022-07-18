@@ -1,7 +1,6 @@
 package osmanov.example.mvicurrencyandroid.storybook.core
 
 import androidx.navigation.NavController
-import org.koin.core.module.Module
 
 /**
  * Base interface which represent Story for Storybook flow.
@@ -11,10 +10,6 @@ interface Story {
 
     val title: String
 
-    fun present(
-        navController: NavController,
-        fakeModules: List<Module>,
-        originModules: List<Module>
-    )
+    fun present(navController: NavController)
 
 }

@@ -69,9 +69,7 @@ class StorybookFragment : BaseFragment(R.layout.fragment_storybook) {
                     unloadModules = originModules
                 )
                 story.present(
-                    navController = requireActivity().findNavController(R.id.navHostFragment),
-                    fakeModules = fakeModules,
-                    originModules = originModules
+                    navController = requireActivity().findNavController(R.id.navHostFragment)
                 )
             }
         }
